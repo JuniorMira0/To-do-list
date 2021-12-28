@@ -13,8 +13,18 @@ function clearList() {
   }
 }
 
-function creatEvent(element, handler) {
+function creatClickEvent(element, handler) {
   element.addEventListener('click', handler);
+}
+
+function markIten(li) {
+  li.addEventListener('dblclick', () => {
+    if (li.classList.contains('completed')) {
+      li.classList.remove('completed');
+    } else {
+      li.classList.add('completed');
+    }
+  });
 }
 
 // Cria listas no input
@@ -22,16 +32,15 @@ function creatEvent(element, handler) {
 function makeList() {
   const orderList = document.createElement('li');
   orderList.classList.add('li');
-  creatEvent(orderList, () => {
+  creatClickEvent(orderList, () => {
     clearList();
     orderList.classList.add('selected');
   });
   orderList.innerText = input.value;
   listaOrdenada.appendChild(orderList);
   input.value = '';
+  markIten(orderList);
 }
-
-// seleciona com click cada elemento da lista
 
 window.onload = () => {
   button.addEventListener('click', () => {
