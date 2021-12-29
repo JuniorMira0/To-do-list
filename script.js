@@ -5,45 +5,27 @@ const listas = document.getElementsByClassName('li');
 
 /* ------------------------------------------------- */
 
-function clearList() {
-  for (let i = 0; i < listas.length; i += 1) {
-    if (listas[i].classList.contains('selected')) {
-      listas[i].classList.remove('selected');
-    }
-  }
-}
-
-function creatClickEvent(element, handler) {
-  element.addEventListener('click', handler);
-}
-
-function markIten(li) {
-  li.addEventListener('dblclick', () => {
-    if (li.classList.contains('completed')) {
-      li.classList.remove('completed');
-    } else {
-      li.classList.add('completed');
-    }
-  });
-}
-
-// Cria listas no input
-
-function makeList() {
-  const orderList = document.createElement('li');
-  orderList.classList.add('li');
-  creatClickEvent(orderList, () => {
-    clearList();
-    orderList.classList.add('selected');
-  });
-  orderList.innerText = input.value;
-  listaOrdenada.appendChild(orderList);
-  input.value = '';
-  markIten(orderList);
-}
-
-window.onload = () => {
+function makeListIten() {
   button.addEventListener('click', () => {
-    makeList();
+    const orderList = document.createElement('li');
+    orderList.classList.add('li');
+    orderList.innerText = input.value;
+    listaOrdenada.appendChild(orderList);
+    input.value = '';
   });
-};
+}
+makeListIten();
+
+function selectIten(event) {
+  const iten = document.querySelector('.selected');
+  if (iten) {
+    iten.classList.remove('selected');
+  }
+  event.target.classList.add('selected');
+}
+listaOrdenada.addEventListener('click', selectIten);
+
+function markIten(event) {
+  event.target.classList.toggle('completed');
+}
+listaOrdenada.addEventListener('dblclick', markIten);
