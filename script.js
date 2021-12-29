@@ -47,3 +47,20 @@ function clearList() {
   });
 }
 clearList();
+
+// adiciona botão que remove os itens marcados como completos
+
+function removeComp() {
+  const compButton = document.getElementById('remover-selecionado');
+  compButton.addEventListener('click', () => {
+    for (let i = 0; i < listas.length; i += 1) {
+      if (listas[i].classList.contains('completed')) {
+        listas[i].remove();
+      }
+    }
+  });
+}
+removeComp();
+
+// Projeto realizado com supervisão de Lucas Cardoso - Software Developer
+// Ajuda e revisão de Victor Amancio - Turma 19C
