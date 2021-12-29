@@ -5,6 +5,8 @@ const listas = document.getElementsByClassName('li');
 
 /* ------------------------------------------------- */
 
+// Adiciona a lista de tarefas
+
 function makeListIten() {
   button.addEventListener('click', () => {
     const orderList = document.createElement('li');
@@ -16,6 +18,8 @@ function makeListIten() {
 }
 makeListIten();
 
+// adiciona background com um clique
+
 function selectIten(event) {
   const iten = document.querySelector('.selected');
   if (iten) {
@@ -25,7 +29,21 @@ function selectIten(event) {
 }
 listaOrdenada.addEventListener('click', selectIten);
 
+// marca o item com um traço com dois cliques
+
 function markIten(event) {
   event.target.classList.toggle('completed');
 }
 listaOrdenada.addEventListener('dblclick', markIten);
+
+// adiciona botão para apagar a lista
+
+function clearList() {
+  const clearButton = document.getElementById('apaga-tudo');
+  clearButton.addEventListener('click', () => {
+    for (let i = listaOrdenada.childNodes.length - 1; i >= 0; i -= 1) {
+      listaOrdenada.childNodes[i].remove();
+    }
+  });
+}
+clearList();
