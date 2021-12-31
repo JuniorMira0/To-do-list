@@ -1,6 +1,7 @@
 const TODO_PAGE_TITLE = 'Minha Lista de Tarefas';
 const TODO_PAGE_DESCRIPTION_SELECTOR = '#funcionamento';
-const TODO_PAGE_DESCRIPTION = 'Clique duas vezes em um item para marcá-lo como completo';
+const TODO_PAGE_DESCRIPTION =
+  'Clique duas vezes em um item para marcá-lo como completo';
 const TODO_ADD_INPUT_SELECTOR = 'input#texto-tarefa';
 const TODO_LIST_SELECTOR = 'ol#lista-tarefas';
 const TODO_LIST_LINE_SELECTOR = 'ol#lista-tarefas>li';
@@ -31,13 +32,12 @@ const checkTodoList = (todos = []) => {
   }
 };
 
-
 describe('1 - Adicone à sua lista o título "Minha Lista de Tarefas" em uma tag <header>', () => {
   beforeEach(() => {
     cy.viewport(1366, 768);
     cy.visit('./index.html');
   });
-  
+
   it('Será verificado se sua página possui uma tag `header` com o conteúdo `Minha Lista de Tarefas`', () => {
     cy.get('header').contains(TODO_PAGE_TITLE);
   });
@@ -251,7 +251,7 @@ describe('9 - Clicar duas vezes em um item, faz com que ele seja riscado, indica
     cy.get(TODO_LIST_LINE_SELECTOR).should(
       'not.have.css',
       'text-decoration',
-      'line-through solid rgb(0, 0, 0)',
+      'line-through solid rgb(0, 0, 0)'
     );
   });
 
@@ -266,18 +266,14 @@ describe('9 - Clicar duas vezes em um item, faz com que ele seja riscado, indica
     ];
 
     addTodos(todos);
-    cy.get(TODO_LIST_LINE_SELECTOR)
-      .first()
-      .dblclick();
+    cy.get(TODO_LIST_LINE_SELECTOR).first().dblclick();
 
-    cy.get(TODO_LIST_LINE_SELECTOR)
-      .first()
-      .should('have.class', 'completed');
+    cy.get(TODO_LIST_LINE_SELECTOR).first().should('have.class', 'completed');
 
     cy.get('.completed').should(
       'have.css',
       'text-decoration',
-      'line-through solid rgb(0, 0, 0)',
+      'line-through solid rgb(0, 0, 0)'
     );
   });
 
@@ -292,10 +288,7 @@ describe('9 - Clicar duas vezes em um item, faz com que ele seja riscado, indica
     ];
 
     addTodos(todos);
-    cy.get(TODO_LIST_LINE_SELECTOR)
-      .first()
-      .dblclick()
-      .dblclick();
+    cy.get(TODO_LIST_LINE_SELECTOR).first().dblclick().dblclick();
 
     cy.get(TODO_LIST_LINE_SELECTOR)
       .first()
@@ -303,7 +296,11 @@ describe('9 - Clicar duas vezes em um item, faz com que ele seja riscado, indica
 
     cy.get(TODO_LIST_LINE_SELECTOR)
       .first()
-      .should('not.have.css', 'text-decoration', 'line-through solid rgb(0, 0, 0)');
+      .should(
+        'not.have.css',
+        'text-decoration',
+        'line-through solid rgb(0, 0, 0)'
+      );
   });
 });
 
@@ -391,9 +388,7 @@ describe('12 - Adicione um botão com id="salvar-tarefas" que salve o conteúdo 
     const todos = [todo1, todo2, todo3];
     addTodos(todos);
     checkTodoList(todos);
-    cy.get(TODO_LIST_LINE_SELECTOR)
-      .first()
-      .dblclick();
+    cy.get(TODO_LIST_LINE_SELECTOR).first().dblclick();
 
     cy.get(TODO_SAVE_LIST_BUTTON_SELECTOR).click();
     cy.reload();
@@ -466,9 +461,7 @@ describe('13 - Adicione dois botões, um com id="mover-cima" e outro com id="mov
     ];
 
     addTodos(todos);
-    cy.get(`${TODO_LIST_LINE_SELECTOR}:nth-child(1)`)
-      .click()
-      .dblclick();
+    cy.get(`${TODO_LIST_LINE_SELECTOR}:nth-child(1)`).click().dblclick();
     cy.get(TODO_MOVE_DOWN_BUTTON_SELECTOR).click();
     cy.get(TODO_MOVE_UP_BUTTON_SELECTOR).click();
     checkTodoList(todos);
@@ -545,7 +538,7 @@ describe('13 - Adicione dois botões, um com id="mover-cima" e outro com id="mov
   });
 });
 
-describe('14 - Adicione um botão com id="remover-selecionado" que, quando clicado, remove o item selecionado', () => {
+describe.only('14 - Adicione um botão com id="remover-selecionado" que, quando clicado, remove o item selecionado', () => {
   beforeEach(() => {
     cy.viewport(1366, 768);
     cy.visit('./index.html');
@@ -566,9 +559,7 @@ describe('14 - Adicione um botão com id="remover-selecionado" que, quando clica
     const todos = [todo1, todo2];
     addTodos(todos);
     checkTodoList(todos);
-    cy.get(TODO_LIST_LINE_SELECTOR)
-      .last()
-      .click();
+    cy.get(TODO_LIST_LINE_SELECTOR).last().click();
     cy.get(TODO_REMOVE_SELECTED_BUTTON_SELECTOR).click();
     checkTodoList([todo1]);
   });
