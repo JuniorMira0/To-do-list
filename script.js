@@ -59,7 +59,6 @@ function removeComp() {
     }
   }
 }
-
 compButton.addEventListener('click', removeComp);
 
 // adiciona botão que remove o iten selecionado
