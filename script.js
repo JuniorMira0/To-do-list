@@ -49,18 +49,18 @@ function clearList() {
 clearList();
 
 // adiciona botão que remove os itens marcados como completos
+const compButton = document.getElementById('remover-finalizados');
 
 function removeComp() {
-  const compButton = document.getElementById('remover-finalizados');
-  compButton.addEventListener('click', () => {
-    for (let i = 0; i < listas.length; i += 1) {
-      while (listas[i].classList.contains('completed')) {
-        listas[i].remove();
-      }
+  const finishedItens = document.querySelectorAll('.completed');
+  for (let i = 0; i < finishedItens.length; i += 1) {
+    if (finishedItens[i].classList.contains('completed')) {
+      finishedItens[i].remove();
     }
-  });
+  }
 }
-removeComp();
+
+compButton.addEventListener('click', removeComp);
 
 // adiciona botão que remove o iten selecionado
 
@@ -78,3 +78,4 @@ removeSelec();
 
 // Projeto realizado com supervisão de Lucas Cardoso - Software Developer
 // Ajuda e revisão de Victor Amancio - Turma 19C
+// Emanoel Mattos Turma 14
